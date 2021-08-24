@@ -12,12 +12,12 @@ router.get('/', async (req, res, next) => {
 })
 
 router.get('/:user_id', async (req, res, next) => {
-    try{
-        User.getById(req.params.user_id)
-    }
-    catch(err){
-        next(err)
-    }
+    User.getById(req.params.user_id)
+        .then(user => {
+            res.json(user)
+        })
+        .catch(next)
+    
 })
 
 router.post('/', (req, res, next) => {
