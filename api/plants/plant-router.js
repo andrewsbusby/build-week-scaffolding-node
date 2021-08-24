@@ -19,4 +19,14 @@ router.get('/:plant_id', (req, res, next) => {
     .catch(next);
 })
 
+router.post('/', (req, res, next) => {
+    const plant = req.body
+
+    Plant.create(plant)
+        .then(newPlant => {
+            res.status(201).json(newPlant)
+        })
+        .catch(next)
+})
+
 module.exports = router;
