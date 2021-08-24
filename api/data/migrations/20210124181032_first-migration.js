@@ -5,23 +5,26 @@ exports.up = async (knex) => {
       users.string('username', 200).notNullable()
       users.string('password', 200).notNullable()
       users.timestamps(false, true)
+      users.string('email', 128).notNullable()
     })
     .createTable('plants', plants => {
       plants.increments('plant_id')
       plants.string('name', 128).notNullable()
       plants.string('species', 128).notNullable()
-      plants.text('watering_frequency').notNullable
+      plants.text('watering_frequency').notNullable()
       plants.integer('user_id')
         .unsigned()
         .notNullable()
         .references('user_id')
         .inTable('users')
         .onUpdate('CASCADE')
-        .onDelete('RESTRICT')
+        .onDelete('CASCADE')
 
     })
 }
 
 exports.down = async (knex) => {
-  await knex.schema.dropTableIfExists('users')
+  await knex.schema
+  .dropTableIfExists('plants')
+  .dropTableIfExists('users')
 }

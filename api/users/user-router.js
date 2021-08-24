@@ -25,7 +25,7 @@ router.post('/', (req, res, next) => {
 
     User.add(user)
         .then(newUser => {
-            res.status(201).json(user)
+            res.status(201).json(newUser)
         })
         .catch(next)
 })
