@@ -7,7 +7,7 @@ function getAll() {
 
 function getBy(filter){
     return db('users')
-    .select('user_id', 'username', 'phoneNumber')
+    .select('user_id', 'username', 'phoneNumber', 'password')
     .where(filter)
 }
 
@@ -18,7 +18,7 @@ function getById(user_id) {
 }
 
 async function add(user) {
-    const [id] = await db('users').insert(user)
+    const [id] = await db('users').insert(user, 'user_id')
     return getById(id)
 }
 
