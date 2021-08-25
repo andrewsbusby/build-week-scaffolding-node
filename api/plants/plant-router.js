@@ -1,8 +1,7 @@
 const router = require('express').Router();
 const verifyPlant = require('./plants-middleware');
 const Plant = require('./plant-model');
-const plantsMiddleware = require('./plants-middleware');
-const { response } = require('../server');
+
 
 router.get('/', async (req, res, next) => {
    let user_id = req.decoded.subject;

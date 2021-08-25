@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const bycrypt = require('bcryptjs');
 const User = require('./user-model');
+const restricted = require('../auth/auth-middleware');
 const { checkUserId } = require('./user-middleware');
 
-router.get('/', async (req, res, next) => {
+router.get('/', restricted, async (req, res, next) => {
     try{
         const user = await User.getAll()
         res.json(user)
@@ -13,7 +14,7 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/:user_id', checkUserId,  async (req, res, next) => {
+router.get('/:user_id', checkUserId, restricted, async (req, res, next) => {
     User.getById(req.params.user_id)
         .then(user => {
             res.json(user)
@@ -22,7 +23,7 @@ router.get('/:user_id', checkUserId,  async (req, res, next) => {
     
 })
 
-router.put('/',  (req, res, next) => {
+router.put('/', restricted, (req, res, next) => { //eslint-disable-line
     const user_id = req.decoded.subject;
 
     let user = req.body;
