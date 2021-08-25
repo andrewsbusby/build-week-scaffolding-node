@@ -4,7 +4,7 @@ const Plant = require('./plant-model');
 
 
 router.get('/', async (req, res, next) => {
-   let user_id = req.decoded.subject;
+   let user_id = req.body.subject;
    Plant.findByUserId(user_id)
     .then((plants) => {
         res.status(200).json(plants)

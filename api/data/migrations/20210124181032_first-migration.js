@@ -14,11 +14,10 @@ exports.up = async (knex) => {
       plants.text('watering_frequency').notNullable()
       plants.integer('user_id')
         .unsigned()
-        .notNullable()
         .references('user_id')
         .inTable('users')
         .onUpdate('CASCADE')
-        .onDelete('CASCADE')
+        .onDelete('RESTRICT')
 
     })
 }
